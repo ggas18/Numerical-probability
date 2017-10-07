@@ -32,7 +32,7 @@ clear
 
 g=@(x)log(x);
 f=@(x) 1/pi;
-[I_hat,flag,err_std,nb_sim]=monteCarlo(0.95,0.001,1000000000,g,f);
+[I_hat,flag,err_std,nb_sim]=monteCarlo(0.95,0.01,10000000,g,f);
 
 %% Theorie des jeux: jeux à somme nulle
 Aj=[4 2
