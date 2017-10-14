@@ -27,7 +27,7 @@ function [I_hat,flag,err_std,nb_sim]=monteCarlo(alpha,delta,N,g,f)
   % On fait un nombre n de simulation et on teste si la precision souhaitée
   % est atteinte.
   nb_sim=1;
- while(nb_sim<=N && ((s/sqrt(nb_sim))*Z)>delta)
+ while(nb_sim<N && ((s/sqrt(nb_sim))*Z)>delta)
      
       nb_sim=nb_sim+1;
       
@@ -35,9 +35,11 @@ function [I_hat,flag,err_std,nb_sim]=monteCarlo(alpha,delta,N,g,f)
       Y=g(X)/f(X);% on évalue ensuite Y 
       S1=S1+Y;    % mise-à-jour de S1
       S2=S2+Y^2;  % mise-à-jour de S2
-      s=(S2-(S1/nb_sim)^2)/(nb_sim-1);% mise-à-jour de s
+      %s=(S2-(S1/nb_sim)^2)/(nb_sim-1);% mise-à-jour de s
+      s=(S2-nb_sim*(S1/nb_sim)^2)/(nb_sim-1);
       
-  end
+ end
+  
  flag=((s/sqrt(nb_sim))*Z)<=delta; % le flag c'est pour preciser si nous avons la
  % precision voulue
  
